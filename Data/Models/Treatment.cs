@@ -35,6 +35,6 @@ namespace ZentrixBarber.Data.Models
 
 
         public virtual ICollection<Appointment> Appointments { get; set; }
-            = new HashSet<Appointment>(); 
+            = new HashSet<Appointment>();
     }
 }
