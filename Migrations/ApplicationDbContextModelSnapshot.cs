@@ -112,6 +112,32 @@ namespace ZentrixBarber.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Barbers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Experienced barber with a passion for classic cuts.",
+                            FullName = "Martin Atanasov",
+                            IsActive = true,
+                            YearsOfExperience = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "Specializes in modern styles and beard grooming.",
+                            FullName = "George Donchev",
+                            IsActive = true,
+                            YearsOfExperience = 8
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Bio = "Known for precision cuts and excellent customer service.",
+                            FullName = "Lazar Stoychev",
+                            IsActive = true,
+                            YearsOfExperience = 12
+                        });
                 });
 
             modelBuilder.Entity("ZentrixBarber.Data.Models.BarberTreatment", b =>
@@ -127,6 +153,68 @@ namespace ZentrixBarber.Migrations
                     b.HasIndex("TreatmentId");
 
                     b.ToTable("BarberTreatments");
+
+                    b.HasData(
+                        new
+                        {
+                            BarberId = 1,
+                            TreatmentId = 1
+                        },
+                        new
+                        {
+                            BarberId = 1,
+                            TreatmentId = 2
+                        },
+                        new
+                        {
+                            BarberId = 1,
+                            TreatmentId = 4
+                        },
+                        new
+                        {
+                            BarberId = 1,
+                            TreatmentId = 5
+                        },
+                        new
+                        {
+                            BarberId = 1,
+                            TreatmentId = 6
+                        },
+                        new
+                        {
+                            BarberId = 2,
+                            TreatmentId = 1
+                        },
+                        new
+                        {
+                            BarberId = 2,
+                            TreatmentId = 2
+                        },
+                        new
+                        {
+                            BarberId = 2,
+                            TreatmentId = 3
+                        },
+                        new
+                        {
+                            BarberId = 2,
+                            TreatmentId = 6
+                        },
+                        new
+                        {
+                            BarberId = 3,
+                            TreatmentId = 1
+                        },
+                        new
+                        {
+                            BarberId = 3,
+                            TreatmentId = 3
+                        },
+                        new
+                        {
+                            BarberId = 3,
+                            TreatmentId = 4
+                        });
                 });
 
             modelBuilder.Entity("ZentrixBarber.Data.Models.Treatment", b =>
@@ -162,6 +250,62 @@ namespace ZentrixBarber.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Treatments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "A traditional haircut for men.",
+                            DurationMinutes = 30,
+                            Name = "Classic Haircut",
+                            Price = 15.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Description = "Precise fade down to the skin with a sharp line-up.",
+                            DurationMinutes = 45,
+                            Name = "Skin Fade",
+                            Price = 18.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            Description = "Haircut for kids under 12.",
+                            DurationMinutes = 30,
+                            Name = "Kids Haircut",
+                            Price = 12.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Description = "Beard trim, shaping and hot towel finish.",
+                            DurationMinutes = 20,
+                            Name = "Beard Trim & Shape",
+                            Price = 10.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 2,
+                            Description = "Traditional straight razor shave with hot towels.",
+                            DurationMinutes = 30,
+                            Name = "Hot Towel Shave",
+                            Price = 14.00m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            Description = "Full haircut combined with beard trim and shaping.",
+                            DurationMinutes = 60,
+                            Name = "Haircut & Beard",
+                            Price = 22.00m
+                        });
                 });
 
             modelBuilder.Entity("ZentrixBarber.Data.Models.TreatmentCategory", b =>
@@ -172,6 +316,10 @@ namespace ZentrixBarber.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -180,6 +328,26 @@ namespace ZentrixBarber.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TreatmentCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Classic haircuts for all hair types.",
+                            Name = "Haircut"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Professional beard trimming and styling.",
+                            Name = "Beard Grooming"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Combo treatment including haircut and beard grooming.",
+                            Name = "Combo"
+                        });
                 });
 
             modelBuilder.Entity("ZentrixBarber.Data.Models.Appointment", b =>
