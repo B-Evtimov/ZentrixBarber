@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ZentrixBarber.Models;
+using ZentrixBarber.ViewModels;
 
 namespace ZentrixBarber.Controllers
 {
