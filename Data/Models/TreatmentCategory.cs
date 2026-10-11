@@ -14,6 +14,9 @@ namespace ZentrixBarber.Data.Models
         [MinLength(NameMinLength)]
         public string Name { get; set; } = null!;
 
+        [MaxLength(DescriptionMaxLength)]
+        public string? Description { get; set; }
+
         public virtual ICollection<Treatment> Treatments { get; set; } = new HashSet<Treatment>();
     }
 }
