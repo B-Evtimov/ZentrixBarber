@@ -33,5 +33,46 @@ namespace ZentrixBarber.Controllers
 
             return View(barbers);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            BarberDetailsViewModel? model = await dbContext.Barbers
+                .AsNoTracking()
+                .Where(b => b.Id == id && b.IsActive)
+                .Select(b => new BarberDetailsViewModel
+                {
+                    Id = b.Id,
+
+                    FullName = b.FullName,
+
+                    Bio = b.Bio,
+
+                    ImageUrl = b.ImageUrl,
+
+                    YearsOfExperience = b.YearsOfExperience,
+
+                    Treatments = b.BarberTreatments
+
+                        .Select(bt => new BarberTreatmentViewModel
+                        {
+                            Name = bt.Treatment.Name,
+
+                            Price = bt.Treatment.Price,
+                            
+                            DurationMinutes = bt.Treatment.DurationMinutes
+                        })
+                        .OrderBy(t => t.Name)
+                        .ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
     }
 }
