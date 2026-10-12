@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BarberIndexViewModel>
+
+@{
+    ViewData["Title"] = "Our Barbers";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No barbers are available at the moment.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var barber in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@barber.FullName</h5>
+                        <p class="card-text">@barber.YearsOfExperience years of experience</p>
+                        <p class="card-text">Offers @barber.TreatmentsCount services</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
