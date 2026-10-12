@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TreatmentCategoryViewModel>
+
+@{
+    ViewData["Title"] = "Services & Prices";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+@foreach (var category in Model)
+{
+    <section class="mb-5">
+        <h2>@category.Name</h2>
+        @if (!string.IsNullOrWhiteSpace(category.Description))
+        {
+            <p class="text-muted">@category.Description</p>
+        }
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var treatment in category.Treatments)
+            {
+                <partial name="_TreatmentCard" model="treatment" />
+            }
+        </div>
+    </section>
+}
