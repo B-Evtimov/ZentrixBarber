@@ -1,0 +1,17 @@
+﻿@model TreatmentCardViewModel
+
+<div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                <p class="card-text text-muted">@Model.Description</p>
+            }
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <span>@Model.DurationMinutes min</span>
+            <strong>@Model.Price.ToString("F2") €</strong>
+        </div>
+    </div>
+</div>
