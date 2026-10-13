@@ -20,6 +20,30 @@ namespace ZentrixBarber.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            IEnumerable<AppointmentIndexViewModel> appointments = await dbContext.Appointments
+                .AsNoTracking()
+                .Where(a => a.StartTime >= DateTime.Today)
+                .OrderBy(a => a.StartTime)
+                .Select(a => new AppointmentIndexViewModel
+                {
+                    Id = a.Id,
+                    ClientName = a.ClientName,
+                    ClientPhone = a.ClientPhone,
+                    BarberName = a.Barber.FullName,
+                    TreatmentName = a.Treatment.Name,
+                    StartTime = a.StartTime,
+                    DurationMinutes = a.Treatment.DurationMinutes,
+                    Price = a.Treatment.Price,
+                    Status = a.Status
+                })
+                .ToListAsync();
+
+            return View(appointments);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Create(int? barberId)
         {
             AppointmentFormViewModel model = new AppointmentFormViewModel
