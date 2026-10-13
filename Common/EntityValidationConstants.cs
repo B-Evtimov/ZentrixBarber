@@ -38,6 +38,9 @@
             public const int ClientPhoneMaxLength = 20;
             public const int ClientEmailMaxLength = 100;
             public const int NotesMaxLength = 500;
+            public const string ClientPhoneRegex = @"^\+?[0-9\s\-]{7,20}$";
+            public const int OpeningHour = 9;
+            public const int ClosingHour = 20;
         }
     }
 }
