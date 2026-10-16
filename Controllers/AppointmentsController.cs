@@ -7,6 +7,7 @@ using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using ZentrixBarber.Data.Models;
 using ZentrixBarber.Data.Models.Enums;
 using static ZentrixBarber.Common.ValidationMessages;
+using static ZentrixBarber.Common.NotificationMessages;
 
 namespace ZentrixBarber.Controllers
 {
@@ -120,7 +121,7 @@ namespace ZentrixBarber.Controllers
             await dbContext.Appointments.AddAsync(appointment);
             await dbContext.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Your appointment was booked successfully.";
+            TempData["SuccessMessage"] = AppointmentCreated;
 
             return RedirectToAction(nameof(Index));
         }
