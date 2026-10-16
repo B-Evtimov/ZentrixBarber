@@ -44,6 +44,37 @@ namespace ZentrixBarber.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            AppointmentDetailsViewModel? model = await dbContext.Appointments
+                .AsNoTracking()
+                .Where(a => a.Id == id)
+                .Select(a => new AppointmentDetailsViewModel
+                {
+                    Id = a.Id,
+                    ClientName = a.ClientName,
+                    ClientPhone = a.ClientPhone,
+                    ClientEmail = a.ClientEmail,
+                    Notes = a.Notes,
+                    BarberName = a.Barber.FullName,
+                    TreatmentName = a.Treatment.Name,
+                    StartTime = a.StartTime,
+                    DurationMinutes = a.Treatment.DurationMinutes,
+                    Price = a.Treatment.Price,
+                    Status = a.Status,
+                    CreatedOn = a.CreatedOn
+                })
+                .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Create(int? barberId)
         {
             AppointmentFormViewModel model = new AppointmentFormViewModel
