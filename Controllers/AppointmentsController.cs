@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZentrixBarber.Data;
-using ZentrixBarber.ViewModels.Appointments;
-using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using ZentrixBarber.Data.Models;
 using ZentrixBarber.Data.Models.Enums;
-using static ZentrixBarber.Common.ValidationMessages;
+using ZentrixBarber.ViewModels.Appointments;
+using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.NotificationMessages;
+using static ZentrixBarber.Common.ValidationMessages;
 
 namespace ZentrixBarber.Controllers
 {
@@ -89,7 +89,6 @@ namespace ZentrixBarber.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AppointmentFormViewModel model)
@@ -124,6 +123,84 @@ namespace ZentrixBarber.Controllers
             TempData["SuccessMessage"] = AppointmentCreated;
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Appointment? appointment = await dbContext.Appointments
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanBeEdited(appointment.Status))
+            {
+                TempData["ErrorMessage"] = AppointmentNotEditable;
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            AppointmentFormViewModel model = new AppointmentFormViewModel
+            {
+                ClientName = appointment.ClientName,
+                ClientPhone = appointment.ClientPhone,
+                ClientEmail = appointment.ClientEmail,
+                StartTime = appointment.StartTime,
+                BarberId = appointment.BarberId,
+                TreatmentId = appointment.TreatmentId,
+                Notes = appointment.Notes
+            };
+
+            await LoadSelectListsAsync(model);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, AppointmentFormViewModel model)
+        {
+            Appointment? appointment = await dbContext.Appointments
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            if (!CanBeEdited(appointment.Status))
+            {
+                TempData["ErrorMessage"] = AppointmentNotEditable;
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            if (ModelState.IsValid)
+            {
+                await ValidateBookingRulesAsync(model, id);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                await LoadSelectListsAsync(model);
+                return View(model);
+            }
+
+            appointment.ClientName = model.ClientName.Trim();
+            appointment.ClientPhone = model.ClientPhone.Trim();
+            appointment.ClientEmail = model.ClientEmail?.Trim();
+            appointment.StartTime = model.StartTime;
+            appointment.BarberId = model.BarberId;
+            appointment.TreatmentId = model.TreatmentId;
+            appointment.Notes = model.Notes?.Trim();
+
+            await dbContext.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = AppointmentUpdated;
+
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         private async Task LoadSelectListsAsync(AppointmentFormViewModel model)
@@ -190,19 +267,22 @@ namespace ZentrixBarber.Controllers
                 return;
             }
 
-            
-
             bool isBarberBusy = await dbContext.Appointments
-    .AnyAsync(a => a.BarberId == model.BarberId
-                && (excludedAppointmentId == null || a.Id != excludedAppointmentId)
-                && a.Status != AppointmentStatus.Cancelled
-                && a.StartTime < endTime
-                && a.StartTime.AddMinutes(a.Treatment.DurationMinutes) > model.StartTime);
+                .AnyAsync(a => a.BarberId == model.BarberId
+                            && (excludedAppointmentId == null || a.Id != excludedAppointmentId)
+                            && a.Status != AppointmentStatus.Cancelled
+                            && a.StartTime < endTime
+                            && a.StartTime.AddMinutes(a.Treatment.DurationMinutes) > model.StartTime);
 
             if (isBarberBusy)
             {
                 ModelState.AddModelError(string.Empty, BarberBusyMessage);
             }
+        }
+
+        private static bool CanBeEdited(AppointmentStatus status)
+        {
+            return status == AppointmentStatus.Pending || status == AppointmentStatus.Confirmed;
         }
     }
 }
