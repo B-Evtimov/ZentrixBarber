@@ -1,0 +1,73 @@
+﻿@model AppointmentDetailsViewModel
+
+@{
+    ViewData["Title"] = "Appointment Details";
+
+    string badgeClass = Model.Status switch
+    {
+        AppointmentStatus.Pending => "bg-warning text-dark",
+        AppointmentStatus.Confirmed => "bg-success",
+        AppointmentStatus.Completed => "bg-secondary",
+        AppointmentStatus.Cancelled => "bg-danger",
+        _ => "bg-light text-dark"
+    };
+}
+
+<div class="d-flex align-items-center gap-3 mb-4">
+    <h1 class="mb-0">@ViewData["Title"]</h1>
+    <span class="badge fs-6 @badgeClass">@Model.Status</span>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">Booking</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Date</dt>
+                    <dd class="col-sm-8">@Model.StartTime.ToString("dd.MM.yyyy")</dd>
+
+                    <dt class="col-sm-4">Time</dt>
+                    <dd class="col-sm-8">@Model.StartTime.ToString("HH:mm") - @Model.EndTime.ToString("HH:mm")</dd>
+
+                    <dt class="col-sm-4">Barber</dt>
+                    <dd class="col-sm-8">@Model.BarberName</dd>
+
+                    <dt class="col-sm-4">Service</dt>
+                    <dd class="col-sm-8">@Model.TreatmentName (@Model.DurationMinutes min)</dd>
+
+                    <dt class="col-sm-4">Price</dt>
+                    <dd class="col-sm-8">@Model.Price.ToString("F2") €</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header fw-semibold">Client</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Name</dt>
+                    <dd class="col-sm-8">@Model.ClientName</dd>
+
+                    <dt class="col-sm-4">Phone</dt>
+                    <dd class="col-sm-8">@Model.ClientPhone</dd>
+
+                    <dt class="col-sm-4">Email</dt>
+                    <dd class="col-sm-8">@(Model.ClientEmail ?? "-")</dd>
+
+                    <dt class="col-sm-4">Notes</dt>
+                    <dd class="col-sm-8">@(Model.Notes ?? "-")</dd>
+
+                    <dt class="col-sm-4">Booked on</dt>
+                    <dd class="col-sm-8">@Model.CreatedOn.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-outline-secondary">Back to appointments</a>
+</div>
