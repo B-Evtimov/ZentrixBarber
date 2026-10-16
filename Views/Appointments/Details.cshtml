@@ -68,6 +68,11 @@
     </div>
 </div>
 
-<div class="mt-4">
+<div class="mt-4 d-flex gap-2">
     <a asp-action="Index" class="btn btn-outline-secondary">Back to appointments</a>
+
+    @if (Model.Status == AppointmentStatus.Pending || Model.Status == AppointmentStatus.Confirmed)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-dark">Edit</a>
+    }
 </div>
