@@ -118,7 +118,7 @@ namespace ZentrixBarber.Controllers
                 .ToListAsync();
         }
 
-        private async Task ValidateBookingRulesAsync(AppointmentFormViewModel model)
+        private async Task ValidateBookingRulesAsync(AppointmentFormViewModel model, int? excludedAppointmentId = null)
         {
             if (model.StartTime <= DateTime.Now)
             {
@@ -158,11 +158,14 @@ namespace ZentrixBarber.Controllers
                 return;
             }
 
+            
+
             bool isBarberBusy = await dbContext.Appointments
-                .AnyAsync(a => a.BarberId == model.BarberId
-                            && a.Status != AppointmentStatus.Cancelled
-                            && a.StartTime < endTime
-                            && a.StartTime.AddMinutes(a.Treatment.DurationMinutes) > model.StartTime);
+    .AnyAsync(a => a.BarberId == model.BarberId
+                && (excludedAppointmentId == null || a.Id != excludedAppointmentId)
+                && a.Status != AppointmentStatus.Cancelled
+                && a.StartTime < endTime
+                && a.StartTime.AddMinutes(a.Treatment.DurationMinutes) > model.StartTime);
 
             if (isBarberBusy)
             {
