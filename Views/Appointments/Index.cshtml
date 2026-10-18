@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AppointmentIndexViewModel>
+@model IEnumerable<AppointmentIndexViewModel>
 
 @{
     ViewData["Title"] = "Upcoming Appointments";
@@ -25,6 +25,10 @@ else
                     <th>Service</th>
                     <th>Price</th>
                     <th>Status</th>
+
+                    <th class="text-end">Actions</th>
+
+
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +56,16 @@ else
                         <td>@appointment.TreatmentName</td>
                         <td>@appointment.Price.ToString("F2") €</td>
                         <td><span class="badge @badgeClass">@appointment.Status</span></td>
+
+                        <td class="text-end text-nowrap">
+                            <a asp-action="Details" asp-route-id="@appointment.Id" class="btn btn-sm btn-outline-dark">Details</a>
+                            @if (appointment.Status == AppointmentStatus.Pending || appointment.Status == AppointmentStatus.Confirmed)
+                            {
+                                <a asp-action="Edit" asp-route-id="@appointment.Id" class="btn btn-sm btn-dark">Edit</a>
+                            }
+                        </td>
+
+
                     </tr>
                 }
             </tbody>
