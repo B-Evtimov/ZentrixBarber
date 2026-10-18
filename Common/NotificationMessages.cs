@@ -6,5 +6,7 @@ namespace ZentrixBarber.Common
         public const string AppointmentCreated = "Your appointment was booked successfully.";
         public const string AppointmentUpdated = "The appointment was updated successfully.";
         public const string AppointmentNotEditable = "Only pending or confirmed appointments can be edited.";
+        public const string AppointmentStatusUpdated = "The appointment status was updated successfully.";
+        public const string InvalidStatusChange = "This status change is not allowed.";
     }
 }
