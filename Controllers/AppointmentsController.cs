@@ -203,6 +203,32 @@ namespace ZentrixBarber.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeStatus(int id, AppointmentStatus newStatus)
+        {
+            Appointment? appointment = await dbContext.Appointments
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            if (!IsValidStatusTransition(appointment.Status, newStatus))
+            {
+                TempData["ErrorMessage"] = InvalidStatusChange;
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            appointment.Status = newStatus;
+            await dbContext.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = AppointmentStatusUpdated;
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
         private async Task LoadSelectListsAsync(AppointmentFormViewModel model)
         {
             model.Barbers = await dbContext.Barbers
@@ -283,6 +309,18 @@ namespace ZentrixBarber.Controllers
         private static bool CanBeEdited(AppointmentStatus status)
         {
             return status == AppointmentStatus.Pending || status == AppointmentStatus.Confirmed;
+        }
+
+        private static bool IsValidStatusTransition(AppointmentStatus currentStatus, AppointmentStatus newStatus)
+        {
+            return (currentStatus, newStatus) switch
+            {
+                (AppointmentStatus.Pending, AppointmentStatus.Confirmed) => true,
+                (AppointmentStatus.Pending, AppointmentStatus.Cancelled) => true,
+                (AppointmentStatus.Confirmed, AppointmentStatus.Completed) => true,
+                (AppointmentStatus.Confirmed, AppointmentStatus.Cancelled) => true,
+                _ => false
+            };
         }
     }
 }
