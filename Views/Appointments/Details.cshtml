@@ -1,4 +1,4 @@
-﻿@model AppointmentDetailsViewModel
+@model AppointmentDetailsViewModel
 
 @{
     ViewData["Title"] = "Appointment Details";
@@ -68,11 +68,35 @@
     </div>
 </div>
 
-<div class="mt-4 d-flex gap-2">
+<div class="mt-4 d-flex flex-wrap gap-2">
     <a asp-action="Index" class="btn btn-outline-secondary">Back to appointments</a>
 
     @if (Model.Status == AppointmentStatus.Pending || Model.Status == AppointmentStatus.Confirmed)
     {
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-dark">Edit</a>
+    }
+
+    @if (Model.Status == AppointmentStatus.Pending)
+    {
+        <form asp-action="ChangeStatus" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" name="newStatus" value="@AppointmentStatus.Confirmed" />
+            <button type="submit" class="btn btn-success">Confirm</button>
+        </form>
+    }
+
+    @if (Model.Status == AppointmentStatus.Confirmed)
+    {
+        <form asp-action="ChangeStatus" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" name="newStatus" value="@AppointmentStatus.Completed" />
+            <button type="submit" class="btn btn-secondary">Mark as completed</button>
+        </form>
+    }
+
+    @if (Model.Status == AppointmentStatus.Pending || Model.Status == AppointmentStatus.Confirmed)
+    {
+        <form asp-action="ChangeStatus" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" name="newStatus" value="@AppointmentStatus.Cancelled" />
+            <button type="submit" class="btn btn-outline-danger">Cancel appointment</button>
+        </form>
     }
 </div>
