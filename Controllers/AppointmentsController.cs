@@ -47,25 +47,7 @@ namespace ZentrixBarber.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            AppointmentDetailsViewModel? model = await dbContext.Appointments
-                .AsNoTracking()
-                .Where(a => a.Id == id)
-                .Select(a => new AppointmentDetailsViewModel
-                {
-                    Id = a.Id,
-                    ClientName = a.ClientName,
-                    ClientPhone = a.ClientPhone,
-                    ClientEmail = a.ClientEmail,
-                    Notes = a.Notes,
-                    BarberName = a.Barber.FullName,
-                    TreatmentName = a.Treatment.Name,
-                    StartTime = a.StartTime,
-                    DurationMinutes = a.Treatment.DurationMinutes,
-                    Price = a.Treatment.Price,
-                    Status = a.Status,
-                    CreatedOn = a.CreatedOn
-                })
-                .FirstOrDefaultAsync();
+            AppointmentDetailsViewModel? model = await GetAppointmentDetailsAsync(id);
 
             if (model == null)
             {
@@ -227,6 +209,63 @@ namespace ZentrixBarber.Controllers
             TempData["SuccessMessage"] = AppointmentStatusUpdated;
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            AppointmentDetailsViewModel? model = await GetAppointmentDetailsAsync(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName(nameof(Delete))]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Appointment? appointment = await dbContext.Appointments
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Appointments.Remove(appointment);
+            await dbContext.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = AppointmentDeleted;
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<AppointmentDetailsViewModel?> GetAppointmentDetailsAsync(int id)
+        {
+            return await dbContext.Appointments
+                .AsNoTracking()
+                .Where(a => a.Id == id)
+                .Select(a => new AppointmentDetailsViewModel
+                {
+                    Id = a.Id,
+                    ClientName = a.ClientName,
+                    ClientPhone = a.ClientPhone,
+                    ClientEmail = a.ClientEmail,
+                    Notes = a.Notes,
+                    BarberName = a.Barber.FullName,
+                    TreatmentName = a.Treatment.Name,
+                    StartTime = a.StartTime,
+                    DurationMinutes = a.Treatment.DurationMinutes,
+                    Price = a.Treatment.Price,
+                    Status = a.Status,
+                    CreatedOn = a.CreatedOn
+                })
+                .FirstOrDefaultAsync();
         }
 
         private async Task LoadSelectListsAsync(AppointmentFormViewModel model)

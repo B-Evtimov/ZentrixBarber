@@ -8,5 +8,7 @@ namespace ZentrixBarber.Common
         public const string AppointmentNotEditable = "Only pending or confirmed appointments can be edited.";
         public const string AppointmentStatusUpdated = "The appointment status was updated successfully.";
         public const string InvalidStatusChange = "This status change is not allowed.";
+        public const string AppointmentDeleted = "The appointment was deleted successfully.";
+
     }
 }
