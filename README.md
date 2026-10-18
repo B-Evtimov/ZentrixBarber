@@ -32,15 +32,21 @@ check the services and prices, and book an appointment on their own - while the 
 - **Barbers list** - all active barbers shown as cards with years of experience and number of offered services
 - **Barber profile** - detailed page with bio, experience and a table of the services the barber offers, including duration and price
 - **Services and prices** - full price list grouped by category (Haircut, Beard Grooming, Combo), rendered through a reusable partial view
-- **Soft delete for barbers** - inactive barbers are hidden from the public pages without losing their appointment history
+- **Online booking** - clients book an appointment by choosing a barber, a service, a date and a time; booking directly from a barber's profile pre-selects the barber
+- **Full appointment management (CRUD)** - list of upcoming appointments, detailed view, editing and deletion with a confirmation page
+- **Appointment status workflow** - appointments move from Pending to Confirmed to Completed, or can be Cancelled; only valid transitions are allowed
+- **Server-side and client-side validation** - data annotations with custom messages, plus business rules checked against the database:
+  - the appointment must be in the future
+  - the whole service must fit within working hours (09:00 - 20:00)
+  - the selected barber must offer the selected service
+  - the barber cannot be double-booked - overlapping appointments are rejected
+- **Soft delete for barbers** - inactive barbers are hidden from the public pages and cannot be booked, without losing their appointment history
 - **Seeded database** - the application starts with ready-to-use barbers, categories, services and barber-service relations
 
 ### Planned
 
-- Booking an appointment with server-side and client-side validation
-- Full CRUD for appointments (create, view, edit, cancel)
-- Protection against double-booking the same barber at the same time
 - Service layer with dependency injection for clean separation of concerns
+- Administrator login - only the shop administrator can manage the schedule
 - Custom dark theme, animations and responsive design improvements
 
 ---
