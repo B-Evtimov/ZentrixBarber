@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ZentrixBarber.Data;
+using ZentrixBarber.Services;
+using ZentrixBarber.Services.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IBarberService, BarberService>();
+builder.Services.AddScoped<ITreatmentService, TreatmentService>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
 builder.Services.AddControllersWithViews();
 
