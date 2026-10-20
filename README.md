@@ -41,7 +41,8 @@ check the services and prices, and book an appointment on their own - while the 
   - the selected barber must offer the selected service
   - the barber cannot be double-booked - overlapping appointments are rejected
 - **Soft delete for barbers** - inactive barbers are hidden from the public pages and cannot be booked, without losing their appointment history
--   - **Service layer** - business logic and database queries live in services behind interfaces, registered through dependency injection; controllers stay thin
+- **Service layer** - business logic and database queries live in services behind interfaces, registered through dependency injection; controllers stay thin
+- **Administrator role** - ASP.NET Core Identity with roles; guests can browse and book, while only the administrator can view, edit, confirm, cancel and delete appointments
 - **Seeded database** - the application starts with ready-to-use barbers, categories, services and barber-service relations
 
 ### Planned
@@ -59,6 +60,7 @@ check the services and prices, and book an appointment on their own - while the 
 | ORM | Entity Framework Core 10 |
 | Database | Microsoft SQL Server |
 | Front-end | Razor Views, Bootstrap 5 |
+| Authentication | ASP.NET Core Identity with roles |
 | Architecture | MVC, View Models, Fluent API configurations, Dependency Injection |
 
 ---
@@ -111,7 +113,7 @@ If your instance has a different name, change the `Server` value:
 | SQL Server Express | `Server=.\\SQLEXPRESS` |
 | LocalDB | `Server=(localdb)\\MSSQLLocalDB` |
 
-No other environment variables or credentials are required.
+No other environment variables are required.
 
 ### 3. Apply the migrations
 
@@ -138,6 +140,16 @@ dotnet run
 ```
 
 ---
+
+### 5. Log in as administrator
+
+An administrator account is created automatically on the first run:
+
+| Email | Password |
+|---|---|
+| `admin@zentrixbarber.com` | `Admin123!` |
+
+The credentials can be changed in the `AdminUser` section of `appsettings.json` before the first run.
 
 ## Project Structure
 
