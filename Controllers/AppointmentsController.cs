@@ -4,9 +4,12 @@ using ZentrixBarber.Services.Interfaces;
 using ZentrixBarber.ViewModels.Appointments;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.NotificationMessages;
+using Microsoft.AspNetCore.Authorization;
+using static ZentrixBarber.Common.ApplicationConstants;
 
 namespace ZentrixBarber.Controllers
 {
+    [Authorize(Roles = AdminRoleName)]
     public class AppointmentsController : Controller
     {
 
@@ -43,6 +46,7 @@ namespace ZentrixBarber.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(int? barberId)
         {
             AppointmentFormViewModel model = new AppointmentFormViewModel
@@ -58,6 +62,7 @@ namespace ZentrixBarber.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(AppointmentFormViewModel model)
         {
             await ValidateBookingAsync(model);
@@ -72,7 +77,12 @@ namespace ZentrixBarber.Controllers
 
             TempData["SuccessMessage"] = AppointmentCreated;
 
-            return RedirectToAction(nameof(Index));
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
 
