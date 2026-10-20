@@ -46,8 +46,6 @@ check the services and prices, and book an appointment on their own - while the 
 - **Seeded database** - the application starts with ready-to-use barbers, categories, services and barber-service relations
 
 ### Planned
-
-- Administrator login - only the shop administrator can manage the schedule
 - Custom dark theme, animations and responsive design improvements
 
 ---
