@@ -1,0 +1,10 @@
+﻿namespace ZentrixBarber.Common
+{
+    public class ApplicationConstants
+    {
+        public const string AdminRoleName = "Admin";
+
+        public const string AdminSettingsSection = "AdminUser";
+
+    }
+}

@@ -3,6 +3,7 @@ using ZentrixBarber.Data;
 using ZentrixBarber.Services;
 using ZentrixBarber.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using ZentrixBarber.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,5 +55,7 @@ app.MapControllerRoute(
 
 app.MapRazorPages()
     .WithStaticAssets();
+
+await app.SeedAdministratorAsync();
 
 app.Run();
