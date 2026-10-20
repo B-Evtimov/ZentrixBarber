@@ -41,11 +41,11 @@ check the services and prices, and book an appointment on their own - while the 
   - the selected barber must offer the selected service
   - the barber cannot be double-booked - overlapping appointments are rejected
 - **Soft delete for barbers** - inactive barbers are hidden from the public pages and cannot be booked, without losing their appointment history
+-   - **Service layer** - business logic and database queries live in services behind interfaces, registered through dependency injection; controllers stay thin
 - **Seeded database** - the application starts with ready-to-use barbers, categories, services and barber-service relations
 
 ### Planned
 
-- Service layer with dependency injection for clean separation of concerns
 - Administrator login - only the shop administrator can manage the schedule
 - Custom dark theme, animations and responsive design improvements
 
@@ -144,11 +144,12 @@ dotnet run
 ```
 ZentrixBarber/
 ├── Common/            Validation constants shared across entities and view models
-├── Controllers/       MVC controllers (Barbers, Treatments, Home)
+├── Controllers/       MVC controllers (Home, Barbers, Treatments, Appointments)
 ├── Data/
 │   ├── Configurations/   Fluent API configurations and seed data
 │   └── Models/           Entity classes and enums
 ├── Migrations/        Entity Framework Core migrations
+├── Services/          Business logic - service interfaces and their implementations
 ├── ViewModels/        View models used by the views
 ├── Views/             Razor views, partial views and the shared layout
 └── wwwroot/           Static files - CSS, JavaScript, images
