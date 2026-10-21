@@ -1,31 +1,181 @@
+:root {
+    --zb-bg: #0e0e10;
+    --zb-surface: #17171a;
+    --zb-surface-hover: #1e1e22;
+    --zb-border: #2a2a2f;
+    --zb-text: #e8e6e3;
+    --zb-text-muted: #9a978f;
+    --zb-accent: #c9a24a;
+    --zb-accent-hover: #dbb661;
+    --zb-heading-font: 'Playfair Display', Georgia, serif;
+    --zb-body-font: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: var(--zb-bg);
+    --bs-body-color: var(--zb-text);
+    --bs-secondary-color: var(--zb-text-muted);
+    --bs-border-color: var(--zb-border);
+    --bs-link-color: var(--zb-accent);
+    --bs-link-color-rgb: 201, 162, 74;
+    --bs-link-hover-color: var(--zb-accent-hover);
+    --bs-link-hover-color-rgb: 219, 182, 97;
+}
+
 html {
-  font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: var(--zb-body-font);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+h1, h2, h3, h4, h5,
+.navbar-brand {
+    font-family: var(--zb-heading-font);
+    letter-spacing: 0.02em;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.text-muted {
+    color: var(--zb-text-muted) !important;
+}
+
+/* Navigation */
+
+.zb-navbar {
+    background-color: rgba(14, 14, 16, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+    .zb-navbar .navbar-brand {
+        color: var(--zb-accent);
+        font-weight: 700;
+    }
+
+    .zb-navbar .nav-link {
+        color: var(--zb-text);
+        transition: color 0.2s ease;
+    }
+
+        .zb-navbar .nav-link:hover,
+        .zb-navbar .nav-link:focus {
+            color: var(--zb-accent);
+        }
+
+/* Buttons */
+
+.btn-accent,
+.btn-primary {
+    --bs-btn-color: #111;
+    --bs-btn-bg: var(--zb-accent);
+    --bs-btn-border-color: var(--zb-accent);
+    --bs-btn-hover-color: #111;
+    --bs-btn-hover-bg: var(--zb-accent-hover);
+    --bs-btn-hover-border-color: var(--zb-accent-hover);
+    --bs-btn-active-color: #111;
+    --bs-btn-active-bg: var(--zb-accent-hover);
+    --bs-btn-active-border-color: var(--zb-accent-hover);
+    font-weight: 600;
+}
+
+.btn:focus-visible,
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--zb-accent);
+    box-shadow: 0 0 0 0.2rem rgba(201, 162, 74, 0.25);
+}
+
+/* Cards */
+
+.card {
+    --bs-card-bg: var(--zb-surface);
+    --bs-card-border-color: var(--zb-border);
+    --bs-card-cap-bg: var(--zb-surface-hover);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--zb-accent);
+    }
+
+/* Home page */
+
+.zb-hero {
+    margin-top: -1.5rem;
+    padding: 5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--zb-border);
+    background: radial-gradient(circle at top, rgba(201, 162, 74, 0.15), transparent 60%), var(--zb-bg);
+}
+
+    .zb-hero h1 {
+        font-size: clamp(2.2rem, 6vw, 4rem);
+    }
+
+    .zb-hero .lead {
+        max-width: 40rem;
+        margin: 1rem auto 2rem;
+        color: var(--zb-text-muted);
+    }
+
+.zb-accent {
+    color: var(--zb-accent);
+}
+
+.zb-step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--zb-accent);
+    color: var(--zb-accent);
+    font-family: var(--zb-heading-font);
+    font-weight: 700;
+}
+
+/* Error pages */
+
+.zb-error-code {
+    font-family: var(--zb-heading-font);
+    font-size: clamp(5rem, 15vw, 9rem);
+    line-height: 1;
+    color: var(--zb-accent);
+}
+
+/* Page entrance animation */
+
+main {
+    animation: zb-fade-in 0.4s ease-out;
+}
+
+@keyframes zb-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main,
+    .card {
+        animation: none;
+        transition: none;
+    }
 }
