@@ -1,8 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    int openingHour = EntityValidationConstants.Appointment.OpeningHour;
+    int closingHour = EntityValidationConstants.Appointment.ClosingHour;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Hero {
+    <section class="zb-hero">
+        <p class="text-uppercase small zb-accent fw-semibold mb-2">Barbershop &middot; Since 2026</p>
+        <h1>Sharp cuts. <span class="zb-accent">Zero waiting.</span></h1>
+        <p class="lead">
+            Pick your barber, choose a service and book a time that suits you -
+            no phone calls, no queues.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a asp-controller="Appointments" asp-action="Create" class="btn btn-accent btn-lg px-4">Book an appointment</a>
+            <a asp-controller="Treatments" asp-action="Index" class="btn btn-outline-light btn-lg px-4">Services &amp; prices</a>
+        </div>
+    </section>
+}
+
+<section class="py-5">
+    <h2 class="text-center mb-5">How it works</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100 text-center p-3">
+                <div class="card-body">
+                    <span class="zb-step-number mb-3">1</span>
+                    <h5 class="card-title">Choose your barber</h5>
+                    <p class="card-text text-muted">Browse our team, their experience and the services each of them offers.</p>
+                    <a asp-controller="Barbers" asp-action="Index">Meet the barbers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center p-3">
+                <div class="card-body">
+                    <span class="zb-step-number mb-3">2</span>
+                    <h5 class="card-title">Pick a service</h5>
+                    <p class="card-text text-muted">Haircuts, beard grooming or a combo - every service with a clear price and duration.</p>
+                    <a asp-controller="Treatments" asp-action="Index">See the price list</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 text-center p-3">
+                <div class="card-body">
+                    <span class="zb-step-number mb-3">3</span>
+                    <h5 class="card-title">Book a time</h5>
+                    <p class="card-text text-muted">Choose a free slot and you are done. We confirm every appointment personally.</p>
+                    <a asp-controller="Appointments" asp-action="Create">Book now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 border-top text-center">
+    <h2 class="mb-3">Opening hours</h2>
+    <p class="fs-4 mb-1">Every day <span class="zb-accent">@openingHour.ToString("00"):00 - @closingHour.ToString("00"):00</span></p>
+    <p class="text-muted">The whole service must fit within working hours.</p>
+</section>
