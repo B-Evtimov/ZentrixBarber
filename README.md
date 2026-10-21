@@ -44,10 +44,9 @@ check the services and prices, and book an appointment on their own - while the 
 - **Service layer** - business logic and database queries live in services behind interfaces, registered through dependency injection; controllers stay thin
 - **Administrator role** - ASP.NET Core Identity with roles; guests can browse and book, while only the administrator can view, edit, confirm, cancel and delete appointments
 - **Seeded database** - the application starts with ready-to-use barbers, categories, services and barber-service relations
-
-### Planned
-- Custom dark theme, animations and responsive design improvements
-
+- **Custom dark theme** - built on Bootstrap 5.3 color modes, with a custom home page, subtle animations and a responsive layout
+- **Custom error pages** - friendly 404 and 500 pages instead of the default browser errors
+- 
 ---
 
 ## Technologies
@@ -137,7 +136,7 @@ Press **F5** in Visual Studio, or:
 dotnet run
 ```
 
----
+
 
 ### 5. Log in as administrator
 
@@ -149,15 +148,19 @@ An administrator account is created automatically on the first run:
 
 The credentials can be changed in the `AdminUser` section of `appsettings.json` before the first run.
 
+---
+
 ## Project Structure
 
 ```
 ZentrixBarber/
+├── Areas/Identity/    Identity pages configuration (login uses the site layout)
 ├── Common/            Validation constants shared across entities and view models
 ├── Controllers/       MVC controllers (Home, Barbers, Treatments, Appointments)
 ├── Data/
 │   ├── Configurations/   Fluent API configurations and seed data
 │   └── Models/           Entity classes and enums
+├── Extensions/        Startup extensions - administrator role and account seeding
 ├── Migrations/        Entity Framework Core migrations
 ├── Services/          Business logic - service interfaces and their implementations
 ├── ViewModels/        View models used by the views
@@ -166,6 +169,10 @@ ZentrixBarber/
 ```
 
 ---
+
+## AI Assistance
+
+In this project, AI was used to fix some errors and the design of the site
 
 ## Author
 
