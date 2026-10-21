@@ -6,11 +6,14 @@ namespace ZentrixBarber.Controllers
 {
     public class HomeController : Controller
     {
-       
-
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult HttpError(int statusCode)
+        {
+            return View(statusCode);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
