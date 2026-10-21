@@ -6,7 +6,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0">@ViewData["Title"]</h1>
-    <a asp-action="Create" class="btn btn-dark">Book an appointment</a>
+    <a asp-action="Create" class="btn btn-accent">Book an appointment</a>
 </div>
 
 @if (!Model.Any())
@@ -58,10 +58,10 @@ else
                         <td><span class="badge @badgeClass">@appointment.Status</span></td>
 
                         <td class="text-end text-nowrap">
-                            <a asp-action="Details" asp-route-id="@appointment.Id" class="btn btn-sm btn-outline-dark">Details</a>
+                            <a asp-action="Details" asp-route-id="@appointment.Id" class="btn btn-sm btn-outline-light">Details</a>
                             @if (appointment.Status == AppointmentStatus.Pending || appointment.Status == AppointmentStatus.Confirmed)
                             {
-                                <a asp-action="Edit" asp-route-id="@appointment.Id" class="btn btn-sm btn-dark">Edit</a>
+                                <a asp-action="Edit" asp-route-id="@appointment.Id" class="btn btn-sm btn-accent">Edit</a>
                             }
                         </td>
 

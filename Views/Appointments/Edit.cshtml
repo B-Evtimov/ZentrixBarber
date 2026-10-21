@@ -12,8 +12,8 @@
         <form asp-action="Edit" asp-route-id="@appointmentId" method="post">
             <partial name="_AppointmentFormFields" model="Model" />
 
-            <button type="submit" class="btn btn-dark">Save changes</button>
-            <a asp-action="Details" asp-route-id="@appointmentId" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-accent">Save changes</button>
+            <a asp-action="Details" asp-route-id="@appointmentId" class="btn btn-outline-light">Cancel</a>
         </form>
     </div>
 </div>
