@@ -21,7 +21,7 @@ ZentrixBarber is a web application for barbershops that moves appointment bookin
 Instead of calling the shop and spending several minutes arranging a time slot, clients can browse the barbers,
 check the services and prices, and book an appointment on their own - while the barbers keep working without interruptions.
 
-> This project is developed as the course assignment for **ASP.NET Fundamentals** at SoftUni and is actively in progress.
+> This project is developed as the course assignment for **ASP.NET Fundamentals** at SoftUni.
 
 ---
 
