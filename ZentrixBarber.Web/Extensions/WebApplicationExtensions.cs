@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using static ZentrixBarber.Common.ApplicationConstants;
 
-namespace ZentrixBarber.Extensions
+namespace ZentrixBarber.Web.Extensions
 {
     public static class WebApplicationExtensions
     {

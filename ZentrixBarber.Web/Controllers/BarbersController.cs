@@ -2,7 +2,7 @@
 using ZentrixBarber.Services.Interfaces;
 using ZentrixBarber.ViewModels.Barbers;
 
-namespace ZentrixBarber.Controllers
+namespace ZentrixBarber.Web.Controllers
 {
     public class BarbersController : Controller
     {

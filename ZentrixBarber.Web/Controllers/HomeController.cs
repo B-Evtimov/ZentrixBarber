@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZentrixBarber.ViewModels;
 
-namespace ZentrixBarber.Controllers
+namespace ZentrixBarber.Web.Controllers
 {
     public class HomeController : Controller
     {

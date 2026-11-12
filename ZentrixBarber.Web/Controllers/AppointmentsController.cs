@@ -7,7 +7,7 @@ using static ZentrixBarber.Common.NotificationMessages;
 using Microsoft.AspNetCore.Authorization;
 using static ZentrixBarber.Common.ApplicationConstants;
 
-namespace ZentrixBarber.Controllers
+namespace ZentrixBarber.Web.Controllers
 {
     [Authorize(Roles = AdminRoleName)]
     public class AppointmentsController : Controller

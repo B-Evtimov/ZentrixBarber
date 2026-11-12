@@ -3,7 +3,7 @@ using ZentrixBarber.Data;
 using ZentrixBarber.Services;
 using ZentrixBarber.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using ZentrixBarber.Extensions;
+using ZentrixBarber.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
