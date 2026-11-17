@@ -18,6 +18,7 @@
 		<ProjectReference Include="..\ZentrixBarber.Common\ZentrixBarber.Common.csproj" />
 		<ProjectReference Include="..\ZentrixBarber.Data.Models\ZentrixBarber.Data.Models.csproj" />
 		<ProjectReference Include="..\ZentrixBarber.Data\ZentrixBarber.Data.csproj" />
+		<ProjectReference Include="..\ZentrixBarber.Web.ViewModels\ZentrixBarber.Web.ViewModels.csproj" />
 	</ItemGroup>
 
 </Project>

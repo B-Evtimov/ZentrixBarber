@@ -1,4 +1,4 @@
-﻿namespace ZentrixBarber.ViewModels.Treatments
+﻿namespace ZentrixBarber.Web.ViewModels.Treatments
 {
     public class TreatmentCategoryViewModel
     {

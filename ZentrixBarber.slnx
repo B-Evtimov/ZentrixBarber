@@ -2,5 +2,6 @@
   <Project Path="ZentrixBarber.Common/ZentrixBarber.Common.csproj" />
   <Project Path="ZentrixBarber.Data.Models/ZentrixBarber.Data.Models.csproj" />
   <Project Path="ZentrixBarber.Data/ZentrixBarber.Data.csproj" />
+  <Project Path="ZentrixBarber.Web.ViewModels/ZentrixBarber.Web.ViewModels.csproj" />
   <Project Path="ZentrixBarber.Web/ZentrixBarber.Web.csproj" />
 </Solution>

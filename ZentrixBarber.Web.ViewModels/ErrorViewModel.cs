@@ -1,4 +1,4 @@
-namespace ZentrixBarber.ViewModels
+namespace ZentrixBarber.Web.ViewModels
 {
     public class ErrorViewModel
     {

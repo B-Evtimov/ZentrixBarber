@@ -1,6 +1,6 @@
 ﻿using ZentrixBarber.Data.Models.Enums;
 
-namespace ZentrixBarber.ViewModels.Appointments
+namespace ZentrixBarber.Web.ViewModels.Appointments
 {
     public class AppointmentDetailsViewModel
     {

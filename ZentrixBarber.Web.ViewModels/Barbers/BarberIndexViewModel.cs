@@ -1,4 +1,4 @@
-﻿namespace ZentrixBarber.ViewModels.Barbers
+﻿namespace ZentrixBarber.Web.ViewModels.Barbers
 {
     public class BarberIndexViewModel
     {

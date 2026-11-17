@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.ValidationMessages;
 
-namespace ZentrixBarber.ViewModels.Appointments
+namespace ZentrixBarber.Web.ViewModels.Appointments
 {
     public class AppointmentFormViewModel
     {

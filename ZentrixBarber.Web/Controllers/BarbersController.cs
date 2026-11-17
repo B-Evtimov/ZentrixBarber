@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ZentrixBarber.Services.Interfaces;
-using ZentrixBarber.ViewModels.Barbers;
+using ZentrixBarber.Web.ViewModels.Barbers;
 
 namespace ZentrixBarber.Web.Controllers
 {
