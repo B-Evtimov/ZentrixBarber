@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ZentrixBarber.Migrations
+namespace ZentrixBarber.Data.Migrations
 {
     /// <inheritdoc />
     public partial class SeedInitialData : Migration

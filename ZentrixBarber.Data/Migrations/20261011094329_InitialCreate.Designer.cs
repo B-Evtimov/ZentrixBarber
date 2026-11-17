@@ -9,7 +9,7 @@ using ZentrixBarber.Data;
 
 #nullable disable
 
-namespace ZentrixBarber.Migrations
+namespace ZentrixBarber.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20261011094329_InitialCreate")]
