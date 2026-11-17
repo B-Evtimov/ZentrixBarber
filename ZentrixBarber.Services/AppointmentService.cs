@@ -4,7 +4,7 @@ using ZentrixBarber.Data;
 using ZentrixBarber.Data.Models;
 using ZentrixBarber.Data.Models.Enums;
 using ZentrixBarber.Services.Interfaces;
-using ZentrixBarber.ViewModels.Appointments;
+using ZentrixBarber.Web.ViewModels.Appointments;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.ValidationMessages;
 

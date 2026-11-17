@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ZentrixBarber.Data;
 using ZentrixBarber.Services.Interfaces;
-using ZentrixBarber.ViewModels.Treatments;
+using ZentrixBarber.Web.ViewModels.Treatments;
 
 namespace ZentrixBarber.Services
 {

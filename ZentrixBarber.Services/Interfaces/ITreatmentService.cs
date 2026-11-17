@@ -1,4 +1,4 @@
-using ZentrixBarber.ViewModels.Treatments;
+using ZentrixBarber.Web.ViewModels.Treatments;
 
 namespace ZentrixBarber.Services.Interfaces
 {

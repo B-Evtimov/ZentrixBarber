@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ZentrixBarber.Common\ZentrixBarber.Common.csproj" />
+		<ProjectReference Include="..\ZentrixBarber.Data\ZentrixBarber.Data.csproj" />
+		<ProjectReference Include="..\ZentrixBarber.Web.ViewModels\ZentrixBarber.Web.ViewModels.csproj" />
+	</ItemGroup>
+
+</Project>

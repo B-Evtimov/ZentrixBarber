@@ -1,5 +1,5 @@
 using ZentrixBarber.Data.Models.Enums;
-using ZentrixBarber.ViewModels.Appointments;
+using ZentrixBarber.Web.ViewModels.Appointments;
 
 namespace ZentrixBarber.Services.Interfaces
 {

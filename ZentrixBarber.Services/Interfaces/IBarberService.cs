@@ -1,4 +1,4 @@
-using ZentrixBarber.ViewModels.Barbers;
+using ZentrixBarber.Web.ViewModels.Barbers;
 
 namespace ZentrixBarber.Services.Interfaces
 {
