@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="ZentrixBarber.Common/ZentrixBarber.Common.csproj" />
+  <Project Path="ZentrixBarber.Data.Models/ZentrixBarber.Data.Models.csproj" />
   <Project Path="ZentrixBarber.Web/ZentrixBarber.Web.csproj" />
 </Solution>

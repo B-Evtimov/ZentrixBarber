@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZentrixBarber.Common\ZentrixBarber.Common.csproj" />
+    <ProjectReference Include="..\ZentrixBarber.Data.Models\ZentrixBarber.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
