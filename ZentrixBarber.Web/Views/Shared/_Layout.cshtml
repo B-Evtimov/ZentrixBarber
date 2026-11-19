@@ -35,7 +35,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Appointments" asp-action="Create">Book now</a>
                         </li>
-                        @if (User.IsInRole(ApplicationConstants.AdminRoleName))
+                        @if (User.IsInRole(ApplicationConstants.AdministratorRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>

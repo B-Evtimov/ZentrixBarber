@@ -5,22 +5,24 @@ namespace ZentrixBarber.Web.Extensions
 {
     public static class WebApplicationExtensions
     {
-        public static async Task SeedAdministratorAsync(this WebApplication app)
+        public static async Task SeedRolesAndAdministratorAsync(this WebApplication app)
         {
             using IServiceScope scope = app.Services.CreateScope();
 
             RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
             UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            if (!await roleManager.RoleExistsAsync(AdminRoleName))
-            {
-                await roleManager.CreateAsync(new IdentityRole(AdminRoleName));
+            string[] roles = { AdministratorRoleName, UserRoleName };
 
+            foreach (string role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
             }
 
             string? email = app.Configuration[$"{AdminSettingsSection}:Email"];
-
             string? password = app.Configuration[$"{AdminSettingsSection}:Password"];
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -48,11 +50,10 @@ namespace ZentrixBarber.Web.Extensions
                 }
             }
 
-            if (!await userManager.IsInRoleAsync(admin, AdminRoleName))
+            if (!await userManager.IsInRoleAsync(admin, AdministratorRoleName))
             {
-                await userManager.AddToRoleAsync(admin, AdminRoleName);
+                await userManager.AddToRoleAsync(admin, AdministratorRoleName);
             }
-
         }
     }
 }

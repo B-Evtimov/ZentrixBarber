@@ -2,9 +2,10 @@
 {
     public class ApplicationConstants
     {
-        public const string AdminRoleName = "Admin";
+        public const string AdministratorRoleName = "Administrator";
 
         public const string AdminSettingsSection = "AdminUser";
 
+        public const string UserRoleName = "User";
     }
 }

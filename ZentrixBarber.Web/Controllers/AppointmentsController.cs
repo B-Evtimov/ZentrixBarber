@@ -9,7 +9,7 @@ using static ZentrixBarber.Common.ApplicationConstants;
 
 namespace ZentrixBarber.Web.Controllers
 {
-    [Authorize(Roles = AdminRoleName)]
+    [Authorize(Roles = AdministratorRoleName)]
     public class AppointmentsController : Controller
     {
 
@@ -77,7 +77,7 @@ namespace ZentrixBarber.Web.Controllers
 
             TempData["SuccessMessage"] = AppointmentCreated;
 
-            if (User.IsInRole(AdminRoleName))
+            if (User.IsInRole(AdministratorRoleName))
             {
                 return RedirectToAction(nameof(Index));
             }

@@ -58,6 +58,6 @@ app.MapControllerRoute(
 app.MapRazorPages()
     .WithStaticAssets();
 
-await app.SeedAdministratorAsync();
+await app.SeedRolesAndAdministratorAsync();
 
 app.Run();
