@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ZentrixBarber.Data.Models.Enums;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
+using Microsoft.AspNetCore.Identity;
 
 namespace ZentrixBarber.Data.Models
 {
@@ -46,5 +47,12 @@ namespace ZentrixBarber.Data.Models
 
         [ForeignKey(nameof(TreatmentId))]
         public virtual Treatment Treatment { get; set; } = null!;
+
+
+        [Comment("Identifier of the user who booked the appointment")]
+        public string? ClientId { get; set; }
+
+        [ForeignKey(nameof(ClientId))]
+        public virtual IdentityUser? Client { get; set; }
     }
 }

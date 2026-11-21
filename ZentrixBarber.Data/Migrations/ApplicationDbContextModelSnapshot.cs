@@ -240,6 +240,10 @@ namespace ZentrixBarber.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("Identifier of the user who booked the appointment");
+
                     b.Property<string>("ClientName")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -272,6 +276,8 @@ namespace ZentrixBarber.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BarberId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("TreatmentId");
 
@@ -611,6 +617,11 @@ namespace ZentrixBarber.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("ZentrixBarber.Data.Models.Treatment", "Treatment")
                         .WithMany("Appointments")
                         .HasForeignKey("TreatmentId")
@@ -618,6 +629,8 @@ namespace ZentrixBarber.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Barber");
+
+                    b.Navigation("Client");
 
                     b.Navigation("Treatment");
                 });

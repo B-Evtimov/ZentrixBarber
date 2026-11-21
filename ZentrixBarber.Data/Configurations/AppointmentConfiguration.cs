@@ -18,6 +18,11 @@ namespace ZentrixBarber.Data.Configurations
                 .HasForeignKey(a => a.TreatmentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            entity.HasOne(a => a.Client)
+                .WithMany()
+                .HasForeignKey(a => a.ClientId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             entity.Property(a => a.Status)
                 .HasConversion<string>()
                 .HasMaxLength(30);
