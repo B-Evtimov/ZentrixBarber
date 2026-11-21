@@ -176,7 +176,7 @@ namespace ZentrixBarber.Services
         }
 
 
-        public async Task CreateAppointmentAsync(AppointmentFormViewModel model)
+        public async Task CreateAppointmentAsync(AppointmentFormViewModel model, string clientId)
         {
             Appointment appointment = new Appointment
             {
@@ -188,7 +188,8 @@ namespace ZentrixBarber.Services
                 BarberId = model.BarberId,
                 TreatmentId = model.TreatmentId,
                 Status = AppointmentStatus.Pending,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                ClientId = clientId
             };
 
             await dbContext.Appointments.AddAsync(appointment);

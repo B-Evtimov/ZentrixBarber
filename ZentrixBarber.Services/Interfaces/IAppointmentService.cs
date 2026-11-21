@@ -17,7 +17,7 @@ namespace ZentrixBarber.Services.Interfaces
 
         Task<(string PropertyName, string ErrorMessage)?> ValidateBookingAsync(AppointmentFormViewModel model, int? excludedAppointmentId = null);
 
-        Task CreateAppointmentAsync(AppointmentFormViewModel model);
+        Task CreateAppointmentAsync(AppointmentFormViewModel model, string clientId);
 
         Task UpdateAppointmentAsync(int id, AppointmentFormViewModel model);
 

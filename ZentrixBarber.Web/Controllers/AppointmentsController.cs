@@ -4,9 +4,12 @@ using ZentrixBarber.Web.ViewModels.Appointments;
 using static ZentrixBarber.Common.ApplicationConstants;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.NotificationMessages;
+using Microsoft.AspNetCore.Authorization;
+using ZentrixBarber.Web.Extensions;
 
 namespace ZentrixBarber.Web.Controllers
 {
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private readonly IAppointmentService appointmentService;
@@ -22,6 +25,7 @@ namespace ZentrixBarber.Web.Controllers
             AppointmentFormViewModel model = new AppointmentFormViewModel
             {
                 BarberId = barberId ?? 0,
+                ClientEmail = User.Identity?.Name,
                 StartTime = DateTime.Today.AddDays(1).AddHours(OpeningHour)
             };
 
@@ -42,7 +46,7 @@ namespace ZentrixBarber.Web.Controllers
                 return View(model);
             }
 
-            await appointmentService.CreateAppointmentAsync(model);
+            await appointmentService.CreateAppointmentAsync(model, User.GetUserId()!);
 
             TempData["SuccessMessage"] = AppointmentCreated;
 
