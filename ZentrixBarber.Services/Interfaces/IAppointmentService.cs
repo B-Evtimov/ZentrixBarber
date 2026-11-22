@@ -7,6 +7,10 @@ namespace ZentrixBarber.Services.Interfaces
     {
         Task<IEnumerable<AppointmentIndexViewModel>> GetUpcomingAppointmentsAsync();
 
+        Task<IEnumerable<AppointmentIndexViewModel>> GetClientAppointmentsAsync(string clientId);
+
+        Task<bool> CancelClientAppointmentAsync(int id, string clientId);
+
         Task<AppointmentDetailsViewModel?> GetAppointmentDetailsAsync(int id);
 
         Task<AppointmentFormViewModel?> GetAppointmentForEditAsync(int id);

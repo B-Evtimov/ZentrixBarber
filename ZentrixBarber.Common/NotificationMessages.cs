@@ -9,6 +9,8 @@ namespace ZentrixBarber.Common
         public const string AppointmentStatusUpdated = "The appointment status was updated successfully.";
         public const string InvalidStatusChange = "This status change is not allowed.";
         public const string AppointmentDeleted = "The appointment was deleted successfully.";
+        public const string AppointmentCancelled = "Your appointment was cancelled.";
+        public const string AppointmentCannotBeCancelled = "This appointment can no longer be cancelled.";
 
     }
 }

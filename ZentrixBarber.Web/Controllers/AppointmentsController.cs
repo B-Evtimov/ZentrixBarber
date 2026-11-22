@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ZentrixBarber.Services.Interfaces;
+using ZentrixBarber.Web.Extensions;
 using ZentrixBarber.Web.ViewModels.Appointments;
 using static ZentrixBarber.Common.ApplicationConstants;
 using static ZentrixBarber.Common.EntityValidationConstants.Appointment;
 using static ZentrixBarber.Common.NotificationMessages;
-using Microsoft.AspNetCore.Authorization;
-using ZentrixBarber.Web.Extensions;
 
 namespace ZentrixBarber.Web.Controllers
 {
@@ -17,6 +17,14 @@ namespace ZentrixBarber.Web.Controllers
         public AppointmentsController(IAppointmentService appointmentService)
         {
             this.appointmentService = appointmentService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            IEnumerable<AppointmentIndexViewModel> appointments = await appointmentService.GetClientAppointmentsAsync(User.GetUserId()!);
+
+            return View(appointments);
         }
 
         [HttpGet]
@@ -55,7 +63,25 @@ namespace ZentrixBarber.Web.Controllers
                 return RedirectToAction("Index", "Appointments", new { area = "Admin" });
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(Mine));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            bool cancelled = await appointmentService.CancelClientAppointmentAsync(id, User.GetUserId()!);
+
+            if (cancelled)
+            {
+                TempData["SuccessMessage"] = AppointmentCancelled;
+            }
+            else
+            {
+                TempData["ErrorMessage"] = AppointmentCannotBeCancelled;
+            }
+
+            return RedirectToAction(nameof(Mine));
         }
 
         private async Task ValidateBookingAsync(AppointmentFormViewModel model)

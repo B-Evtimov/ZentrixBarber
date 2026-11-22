@@ -40,6 +40,45 @@ namespace ZentrixBarber.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<AppointmentIndexViewModel>> GetClientAppointmentsAsync(string clientId)
+        {
+            return await dbContext.Appointments
+                .AsNoTracking()
+                .Where(a => a.ClientId == clientId)
+                .OrderByDescending(a => a.StartTime)
+                .Select(a => new AppointmentIndexViewModel
+                {
+                    Id = a.Id,
+                    ClientName = a.ClientName,
+                    ClientPhone = a.ClientPhone,
+                    BarberName = a.Barber.FullName,
+                    TreatmentName = a.Treatment.Name,
+                    StartTime = a.StartTime,
+                    DurationMinutes = a.Treatment.DurationMinutes,
+                    Price = a.Treatment.Price,
+                    Status = a.Status
+                })
+                .ToListAsync();
+        }
+
+        public async Task<bool> CancelClientAppointmentAsync(int id, string clientId)
+        {
+            Appointment? appointment = await dbContext.Appointments
+                .FirstOrDefaultAsync(a => a.Id == id && a.ClientId == clientId);
+
+            if (appointment == null
+                || !CanBeEdited(appointment.Status)
+                || appointment.StartTime <= DateTime.Now)
+            {
+                return false;
+            }
+
+            appointment.Status = AppointmentStatus.Cancelled;
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<AppointmentDetailsViewModel?> GetAppointmentDetailsAsync(int id)
         {
             return await dbContext.Appointments

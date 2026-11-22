@@ -35,6 +35,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Appointments" asp-action="Create">Book now</a>
                         </li>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Appointments" asp-action="Mine">My appointments</a>
+                            </li>
+                        }
                         @if (User.IsInRole(ApplicationConstants.AdministratorRoleName))
                         {
                             <li class="nav-item">
