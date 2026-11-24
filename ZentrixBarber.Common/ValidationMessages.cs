@@ -8,6 +8,8 @@
         public const string InvalidEmailMessage = "Please enter a valid email address.";
         public const string InvalidPhoneMessage = "Please enter a valid phone number.";
         public const string InvalidSelectionMessage = "Please select a {0}.";
+        public const string RangeMessage = "{0} must be between {1} and {2}.";
+        public const string InvalidUrlMessage = "Please enter a valid URL starting with http:// or https://.";
         public const string PastDateMessage = "Please choose a date and time.";
         public const string OutsideWorkingHoursMessage = "We are open from 09:00 to 20:00. The whole service must fit within working hours.";
         public const string TreatmentNotFoundMessage = "The selected service does not exist.";
