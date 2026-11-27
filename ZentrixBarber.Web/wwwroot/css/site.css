@@ -108,6 +108,12 @@ h1, h2, h3, h4, h5,
         border-color: var(--zb-accent);
     }
 
+
+.form-check-input:checked {
+    background-color: var(--zb-accent);
+    border-color: var(--zb-accent);
+}
+
 /* Home page */
 
 .zb-hero {
