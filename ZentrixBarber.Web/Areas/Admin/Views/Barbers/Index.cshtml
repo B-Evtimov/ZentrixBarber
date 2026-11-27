@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AdminBarberIndexViewModel>
+@{
+    ViewData["Title"] = "Manage Barbers";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">@ViewData["Title"]</h1>
+    <a asp-action="Create" class="btn btn-accent">Add barber</a>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">There are no barbers yet.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Experience</th>
+                    <th>Services</th>
+                    <th>Upcoming appointments</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var barber in Model)
+                {
+                    <tr class="@(barber.IsActive ? "" : "text-muted")">
+                        <td>@barber.FullName</td>
+                        <td>@barber.YearsOfExperience years</td>
+                        <td>@barber.TreatmentsCount</td>
+                        <td>@barber.UpcomingAppointmentsCount</td>
+                        <td>
+                            @if (barber.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </td>
+                        <td class="text-end text-nowrap">
+                            <a asp-action="Edit" asp-route-id="@barber.Id" class="btn btn-sm btn-accent">Edit</a>
+                            <form asp-action="ToggleActive" asp-route-id="@barber.Id" method="post" class="d-inline">
+                                @if (barber.IsActive)
+                                {
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Deactivate</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-sm btn-outline-light">Activate</button>
+                                }
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

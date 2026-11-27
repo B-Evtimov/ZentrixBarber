@@ -1,0 +1,21 @@
+﻿@model BarberFormViewModel
+@{
+    ViewData["Title"] = "Add Barber";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="Create" method="post">
+            <partial name="_BarberFormFields" model="Model" />
+
+            <button type="submit" class="btn btn-accent">Add barber</button>
+            <a asp-action="Index" class="btn btn-outline-light">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
