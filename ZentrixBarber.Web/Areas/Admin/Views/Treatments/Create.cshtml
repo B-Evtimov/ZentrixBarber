@@ -1,0 +1,21 @@
+﻿@model TreatmentFormViewModel
+@{
+    ViewData["Title"] = "Add Service";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="Create" method="post">
+            <partial name="_TreatmentFormFields" model="Model" />
+
+            <button type="submit" class="btn btn-accent">Add service</button>
+            <a asp-action="Index" class="btn btn-outline-light">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

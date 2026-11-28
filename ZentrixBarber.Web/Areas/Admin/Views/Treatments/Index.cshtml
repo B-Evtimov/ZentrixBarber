@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AdminTreatmentIndexViewModel>
+@{
+    ViewData["Title"] = "Manage Services";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">@ViewData["Title"]</h1>
+    <a asp-action="Create" class="btn btn-accent">Add service</a>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">There are no services yet.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Barbers</th>
+                    <th>Appointments</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var treatment in Model)
+                {
+                    <tr>
+                        <td>@treatment.Name</td>
+                        <td>@treatment.CategoryName</td>
+                        <td>@treatment.Price.ToString("F2") €</td>
+                        <td>@treatment.DurationMinutes min</td>
+                        <td>@treatment.BarbersCount</td>
+                        <td>@treatment.AppointmentsCount</td>
+                        <td class="text-end text-nowrap">
+                            <a asp-action="Edit" asp-route-id="@treatment.Id" class="btn btn-sm btn-accent">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@treatment.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
