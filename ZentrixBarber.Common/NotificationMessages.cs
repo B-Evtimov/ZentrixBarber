@@ -15,6 +15,10 @@ namespace ZentrixBarber.Common
         public const string BarberUpdated = "The barber was updated successfully.";
         public const string BarberActivated = "The barber is now active and can be booked.";
         public const string BarberDeactivated = "The barber was deactivated and is hidden from clients.";
+        public const string TreatmentCreated = "The service was added successfully.";
+        public const string TreatmentUpdated = "The service was updated successfully.";
+        public const string TreatmentDeleted = "The service was deleted successfully.";
+        public const string TreatmentHasAppointments = "This service has booked appointments and cannot be deleted.";
 
     }
 }
